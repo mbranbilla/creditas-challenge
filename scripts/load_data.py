@@ -9,12 +9,12 @@ dtypes = dict(
     city=str,
     state=str,
     collateral_debt=float,
-    verified_restriction=int,
-    dishonored_checks=int,
-    expired_debts=int,
-    banking_debts=int,
-    commercial_debts=int,
-    protests=int,
+    verified_restriction="category",
+    dishonored_checks="category",
+    expired_debts="category",
+    banking_debts="category",
+    commercial_debts="category",
+    protests="category",
     marital_status=str,
     informed_restriction=float,
     loan_term=float,
@@ -23,7 +23,7 @@ dtypes = dict(
     auto_brand=str,
     auto_model=str,
     auto_year=float,
-    pre_approved=int,
+    pre_approved="category",
     form_completed=float,
     sent_to_analysis=float,
     channel=str,
@@ -35,7 +35,6 @@ dtypes = dict(
     education_level=str
 )
 
-pd.read_csv("data/dataset.csv", dtype=dtypes, na_values=-1)
 raw_data = load_dataset(dataset="dataset.csv", dtypes=dtypes, path="data/")
 
 raw_data.to_pickle("model_files/raw_data.pkl")

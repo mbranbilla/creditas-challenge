@@ -20,6 +20,8 @@ dataset.drop(
     inplace=True
 )
 
+joblib.dump(missing, "model_files/exclude_missing.pkl")
+
 # Drop id (it isn`t a predictor) and "informed_purpose" column
 dataset.drop(["id", "informed_purpose"], axis=1, inplace=True)
 

@@ -1,5 +1,6 @@
 import os
-from scripts.utils import load_pickle
 
 os.system("python3 scripts/load_data.py")
-os.system("")
+os.system("python3 scripts/preprocessing.py")
+os.system("python3 scripts/feature_generation.py")
+os.system("python3 scripts/model.py")

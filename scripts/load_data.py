@@ -1,4 +1,4 @@
-from scripts.utils import load_dataset, save_pickle
+from utils import load_dataset, save_pickle
 
 dtypes = dict(
     id=int,

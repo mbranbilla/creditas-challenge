@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.externals import joblib
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MultiLabelBinarizer
-from scripts.utils import filter_outliers
+from utils import filter_outliers
 
 # Read dataset from pickle with dtypes
 dataset = pd.read_pickle("model_files/raw_data.pkl")

@@ -8,9 +8,9 @@ X_train = joblib.load("model_files/X_train.pkl")
 y_train = joblib.load("model_files/balanced_y_train.pkl")
 
 model = GradientBoostingClassifier(
-    n_estimators=100,
-    max_features=None,
-    loss='exponential',
+    n_estimators=150,
+    max_features='auto',
+    loss='deviance',
     learning_rate=0.05
     )
 

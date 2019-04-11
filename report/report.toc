@@ -1,3 +1,0 @@
-\babel@toc {portuguese}{}
-\contentsline {section}{\numberline {1}Section with numeration}{1}{section.1}
-\contentsline {subsection}{\numberline {1.1}Subsection with numeration}{1}{subsection.1.1}

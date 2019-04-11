@@ -4,6 +4,8 @@
 
 ### 1. Objetivo
 
+O objetivo da modelagem é predizer se, dado as características de um cliente que necessita de um empréstimo financeiro, este será enviado para análise de crédito. 
+
 ### 2. Descrições dos Arquivos
 
 Os arquivos de modelagem dividem-se em um *pipeline* composto do modelo que apresentou a performance mais adequada ao problema proposto e consolidado em *scripits* Python, juntamente de um *Jpyter Notebook* contendo o processo de avaliação de diversos modelos propostos. 
@@ -42,13 +44,45 @@ Script python que executa todo o pipeline de modelo, exceto as etapas de valida�
 
 Script que contém todas as definições de funções utilizadas.
 
-
-
 ### 3. Pipeline do Modelo
+Breve descrição de todo processo de treinamento e predição. Refere-se aos códigos contidos na pasta `scripts`.
 #### 3.1 Preparando os Dados
+
+- Script `scripts/load_data.py`
+
+Realiza a leitura dos dados, especificando o tipo de cada variável, e salva em um arquivo `picle` para ser tratado.
+
+- Script `scripts/preprocessing.py`
+
+Realiza o tratamento de dados. Nesta etapa o conjunto de dados é tratado, removendo variáveis que não são preditoras, realizando indentificação e tratamento de valores faltantes e outliers. Nesta fase, também é realizado a normalização dos dados.
+
+Neste processo, foram excluídas variáveis que apresentam mais de 30% de entradas nulas. 
+
+    1. Preenchimento de Valores Faltantes:
+
+        - Para variáveis categóricas, foi preenchido com a label `missing`;
+
+        - Para variáveis binárias, foi preenchido com o valor `-1`, com o objetivo de informar ao modelo que existe uma informação fantante, uma vez que há quantidades razoáveis desses valores e que poderiam estar relacionadas com o valor a ser predito;
+
+        - Para variáveis numéricas, foram preenchidos com a `mediana`.
+    
+    2. Tratamento de Valores `outliers`:
+
+        - Valores considerados outliers foram preenchidos com o valor médio da variável em questão. 
+        
+        - Considera-se um valor outlier aquele que diverge da média da variável em mais do que três desvios padrões.
+
+- Script `feature_generation.py`
+
+Realiza a criação de novas features. Aqui são aplicadas técnicas de binarização de features categóricas e geração de relações polinomiais de até segunda ordem para features numéricas.
+
+    1. Variáveis Categóricas
+
+    É feito uma representação,associando a cada categoria um numero binário que será transcrito em `n`colunas, sendo `n`o número de dígitos desta representação.
+
 #### 3.2 Treinando o Modelo
-#### 3.3 Obtendo Métricas de Validação
-#### 3.4 Realizando Predições
+
+Com os parâmetros definidos explicados no arquivo `evaluation.ipynb`. é realizado o treino do modelo com o uso da biblioteca `scikit-learn`, que contém a implementação do modelo escolhido. 
 
 
 ### 4. Como executar (Modelo Implementado)
@@ -62,9 +96,47 @@ Instale as bibliotecas python utilizadas com o comando:
 
 #### 4.2 Visualizando o processo de avaliação e escolha dos modelos citados
 
+Caso não possua o Jupyter instalado, [será necessário seguir os passos descritos neste link](https://jupyter.readthedocs.io/en/latest/install.html).
+
+
+1. Dentro do diretório do projeto, iniciar uma instância do Jupyter Notebook por linha de comando. 
+
+`jupyter-notebook .`
+
+2. Utilize o navegador para visualizar a interface do Jupyter. Em geral, caso as configurações padrões não tenham sido alteradas e não existam outras execuções do Jupyter, a página ficará disponível em `localhost://8888`. 
+
+Nesta interface, clique no arquivo com nome `evaluation.ipynb`
+
+3. Utilize o comando 
+
+`shift + enter`
+
+para executar as células do notebook e, assim, visualizar o processo de validação do modelo. Caso queira apenas visualizar, sem executar, o notebook foi salvo com os resultados da ultima execução.
+
+**Nota:** Na pasta `report` encontra-se uma cópia em formato PDF deste mesmo arquivo. 
+
+
 #### 4.3 Treinando o Modelo
 
+Para treinar o modelo, será necessário navegar até o diretório do projeto utilizando linhas de comando. 
+
+O treinamento do modelo é feito com o comando
+
+`python3 train_pipeline.py`
+
 #### 4.4 Obtendo predições a partir de uma base no formato `.csv`
+
+Para realizar predições com o modelo treinado anteriormente, será necessário navegar até o diretório do projeto utilizando linhas de comando. 
+
+1. Preencher dados de entrada
+
+Será necessário o preenchimento de um arquivo `input.csv`(com exatamente este nome), dentro do diretório `inputs`. Neste local já existe um arquivo preenchido que pode ser utilizado como exemplo. 
+
+2. Realizando a predição
+
+Executar o comando 
+
+`python3 predict.py`
 
 ### 5. Como executar (Jupyter Notebook)
 

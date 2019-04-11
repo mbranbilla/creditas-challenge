@@ -20,7 +20,7 @@ dataset.drop(
     inplace=True
 )
 
-joblib.dump(missing, "model_files/exclude_missing.pkl")
+joblib.dump(missing[missing['missing_rate'] >= .25].index, "model_files/exclude_missing.pkl")
 
 # Drop id (it isn`t a predictor) and "informed_purpose" column
 dataset.drop(["id", "informed_purpose"], axis=1, inplace=True)
@@ -45,14 +45,15 @@ dataset[['informed_restriction', 'form_completed', 'sent_to_analysis']] = datase
 num_cols = list(dataset.select_dtypes(include=['float64']))
 
 for c in num_cols:
-    dataset[c] = dataset[c].fillna(dataset[c].median())
+    replacement = dataset[c].median()
+    dataset[c] = dataset[c].fillna(replacement)
+    joblib.dump(replacement, "model_files/" + c + "_fill_na_value.pkl")
 
 # Outlier filter
 num_cols = list(dataset.select_dtypes(include=['float64']))
 
 for c in num_cols:
     dataset = filter_outliers(dataset, c, n_stds=3)
-
     
 # Set scaler and save pickle
 scaler = StandardScaler()

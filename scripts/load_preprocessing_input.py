@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
-from scripts.utils import load_dataset
 from sklearn.externals import joblib
-from scripts.utils import load_dataset
+from utils import load_dataset
 
 dtypes = dict(
     id=int,

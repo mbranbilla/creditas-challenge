@@ -16,6 +16,6 @@ results['class_probability'] = [p[x] for x, p in zip(results['predicted_class'],
 results['probability_of_send_to_analysis'] = [p[0] for p in probabilities]
 
 
-filename = "outputs/" + datetime.datetime.now() + ".csv"
-filename.replace(" ", "_")
+filename = "outputs/" + str(datetime.datetime.now()) + ".csv"
+filename = filename.replace(" ", "_")
 results.to_csv(filename)

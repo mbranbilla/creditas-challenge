@@ -18,4 +18,8 @@ results['probability_of_send_to_analysis'] = [p[0] for p in probabilities]
 
 filename = "outputs/" + str(datetime.datetime.now()) + ".csv"
 filename = filename.replace(" ", "_")
+
+if not os.path.exists("output/"):
+    os.makedirs("output/")
+
 results.to_csv(filename)

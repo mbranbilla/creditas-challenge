@@ -1,4 +1,5 @@
 from utils import load_dataset, save_pickle
+import os
 
 dtypes = dict(
     id=int,
@@ -36,5 +37,8 @@ dtypes = dict(
 )
 
 raw_data = load_dataset(dataset="dataset.csv", dtypes=dtypes, path="data/")
+
+if not os.path.exists("model_files/"):
+    os.makedirs("model_files/")
 
 raw_data.to_pickle("model_files/raw_data.pkl")
